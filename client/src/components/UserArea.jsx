@@ -186,8 +186,7 @@ function UserArea() {
 
 const StyledUser = styled(AnimatedPages)`
   display: flex;
-  height: 80vh;
-  overflow-y: auto;
+  min-height: 80vh;
   overflow-x: hidden;
   * {
     font-family: "Nunito", sans-serif;
@@ -277,10 +276,9 @@ export const NoteIcon = styled(IconButton)`
   display: flex;
   flex-direction: column;
 
-*{
-  font-size: 30px;
-}
-  
+  * {
+    font-size: 30px;
+  }
 
   span {
     max-height: 0;

@@ -1,10 +1,8 @@
 import styled from "styled-components";
 import { Link } from "react-scroll";
 import { useSelector } from "react-redux";
-
 import { useNavigate } from "react-router";
 import InUser from "./InUser";
-import CircularProgress from "@mui/material/CircularProgress";
 import Switch from "@mui/material/Switch";
 import { i } from "../../assets/icons";
 import { devices } from "../../assets/devices";
@@ -91,9 +89,7 @@ const StyledNavbar = styled.div`
   img {
     max-width: 80%;
     height: auto;
-  }
-  @media ${devices.mobile} {
-    height: 80px;
+    cursor: pointer;
   }
 `;
 
@@ -123,7 +119,7 @@ const StyledProfileArea = styled.div`
   }
 
   button:hover {
-    transform: scale(1.15);
+    transform: scale(1.02);
   }
 
   @media ${devices.mobile} {

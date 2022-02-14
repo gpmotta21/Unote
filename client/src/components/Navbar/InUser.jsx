@@ -43,7 +43,7 @@ function InUser({ setTheme, theme }) {
   return (
     <>
       <OutHover>
-        <OutHoverUser onClick={() => setShowInfo(true)} onMouseEnter={() => setShowInfo(true)}>
+        <OutHoverUser onClick={() => setShowInfo(true)}>
           <span>{i.user}</span>
           <span>{UserReducer.user.username}</span>
           <span>{i.logout}</span>
@@ -121,7 +121,10 @@ const OutHover = styled.div`
   z-index: 2;
   font-size: 20px;
   overflow: hidden;
-  cursor: pointer;
+
+  > div {
+    cursor: pointer;
+  }
 
   @media ${devices.tablet} {
     flex-direction: column;
@@ -152,7 +155,7 @@ const AnimatedProfile = styled(animated.div)`
   padding: 10px;
   border-radius: 0 0 5px 5px;
   background-image: url(${(props) => props.theme.profileWindowBg});
-  background-color: ${props => props.theme.bG};
+  background-color: ${(props) => props.theme.bG};
 
   i {
     position: absolute;

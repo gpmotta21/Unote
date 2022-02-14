@@ -26,23 +26,22 @@ routes.post(
     .withMessage("Invalid Email format")
     .custom((value) => {
       return UserModel.findOne({ email: value }).then((user) => {
-        if (user) return Promise.reject("Email already being used");
+        if (user) return Promise.reject("This Email already being used");
       });
     }),
-    
+
   body("password")
     .isLength({ min: 4, max: 10 })
     .withMessage("Password must have  4 to 10 characters")
     .matches(/^[A-Za-z0-9]+$/)
     .withMessage("Remove white spaces or special characters"),
 
-  body('repeat')
-    .custom((value, {req}) => {
-       if(value !== req.body.password){
-        throw new Error('Password does not match');
-      }else if(!req.body.password) throw new Error('Password does not match');
-      return true;
-    }), 
+  body("repeat").custom((value, { req }) => {
+    if (value !== req.body.password) {
+      throw new Error("Password does not match");
+    } else if (!req.body.password) throw new Error("Password does not match");
+    return true;
+  }),
 
   async (req, res) => {
     const { username, email, password, repeat } = req.body;
@@ -50,7 +49,6 @@ routes.post(
 
     try {
       if (!errors.isEmpty()) {
-        
         const userError = errors.array().find((i) => i.param === "username");
         const emailError = errors.array().find((i) => i.param === "email");
         const passwordError = errors.array().find((i) => i.param === "password");

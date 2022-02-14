@@ -6,7 +6,6 @@ const Notes = express.Router();
 Notes.patch("/createnote/:id", async (req, res) => {
   const { title, note, color } = req.body;
   const { id } = req.params;
-  console.log("teste");
 
   try {
     UserModel.findOneAndUpdate(

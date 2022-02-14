@@ -2,15 +2,18 @@ import * as TYPES from "../actionTypes";
 import * as API from "../apis";
 
 export const SetPage = (page) => async (dispatch) => {
-  dispatch({ type: TYPES.SET_PAGE, payload: page });
+  try {
+    dispatch({ type: TYPES.SET_PAGE, payload: page });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const FetchAll = (token) => async (dispatch) => {
-  dispatch({ type: TYPES.SET_PAGE, payload: "User" });
-  dispatch({ type: TYPES.LOADING_ACCOUNT });
-  dispatch({ type: TYPES.LOADING_NOTES });
-
   try {
+    dispatch({ type: TYPES.SET_PAGE, payload: "User" });
+    dispatch({ type: TYPES.LOADING_ACCOUNT });
+    dispatch({ type: TYPES.LOADING_NOTES });
     const { data } = await API.FETCH_ACCOUNT_URL(token);
 
     dispatch({ type: TYPES.FETCH_ACCOUNT_SUCESS, payload: data });
@@ -21,9 +24,13 @@ export const FetchAll = (token) => async (dispatch) => {
 };
 
 export const LogoutUser = () => async (dispatch) => {
-  await dispatch({ type: TYPES.LOGOUT });
-  await dispatch({ type: TYPES.LOADING_ACCOUNT });
-  localStorage.removeItem("token");
+  try {
+    await dispatch({ type: TYPES.LOGOUT });
+    await dispatch({ type: TYPES.LOADING_ACCOUNT });
+    localStorage.removeItem("token");
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const DeleteAccount = (id) => async (dispatch) => {

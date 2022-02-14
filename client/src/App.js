@@ -68,13 +68,12 @@ const GlobalStyle = createGlobalStyle`
 }
 
 ::-webkit-scrollbar-track {
-   background: ${props => props.theme.bG};
+   background: ${(props) => props.theme.bG};
 }
 
 ::-webkit-scrollbar-thumb {
-  background: ${props => props.theme.secondary};
+  background: ${(props) => props.theme.secondary};
 }
-
 }
 
 button, i{

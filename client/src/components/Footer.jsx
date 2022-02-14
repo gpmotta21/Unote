@@ -3,44 +3,42 @@ import styled from "styled-components";
 import { devices } from "../assets/devices";
 import { i } from "../assets/icons";
 
-
 function Footer() {
-
-  return <StyledFooter>
-    <StyledLink href="https://www.linkedin.com/in/gpmotta21/" target='_blank'>
-      {i.linkedin}
-      <span>gpmotta21</span>
-    </StyledLink>
-    <StyledLink href="https://github.com/gpmotta21/Unote" target='_blank'>
-      {i.github}
-      <span>gpmotta21</span>
-    </StyledLink>
-  </StyledFooter>;
+  return (
+    <StyledFooter>
+      <StyledLink href="https://www.linkedin.com/in/gpmotta21/" target="_blank">
+        {i.linkedin}
+        <span>gpmotta21</span>
+      </StyledLink>
+      <StyledLink href="https://github.com/gpmotta21/Unote" target="_blank">
+        {i.github}
+        <span>gpmotta21</span>
+      </StyledLink>
+    </StyledFooter>
+  );
 }
 
 const StyledFooter = styled.div`
-display: flex;
-justify-content: space-between;
-
-
+  display: flex;
+  justify-content: space-between;
+  padding: 0 8px;
   width: 100%;
   height: 60px;
 
-*{
-  color: ${props => props.theme.navbar};
-}
+  * {
+    color: ${(props) => props.theme.navbar};
+  }
 `;
 
 const StyledLink = styled.a`
-    display: flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-*{
-  font-size: 30px;
-}
-  
+  * {
+    font-size: 30px;
+  }
 
   span {
     max-height: 0;
@@ -57,6 +55,6 @@ const StyledLink = styled.a`
       max-height: 30px;
     }
   }
-`
+`;
 
 export default Footer;
