@@ -62,7 +62,7 @@ const GlobalStyle = createGlobalStyle`
   list-style: none;
   font-family: 'Supermercado One', cursive;
 
-  // ScrollBar setting
+  // ScrollBar settings
   ::-webkit-scrollbar {
   width: 10px;
 }

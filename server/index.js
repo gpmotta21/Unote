@@ -16,7 +16,7 @@ app.use(cors());
 app.use("/", routes, Notes);
 
 app.get("/", (req, res) => {
-  res.send("Hello to my project!!");
+  res.send("Hello to my project!");
 });
 
 const PORT = process.env.PORT || 3001;
