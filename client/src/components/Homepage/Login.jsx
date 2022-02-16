@@ -49,7 +49,7 @@ function Login({ className }) {
           id="filled-size-normal"
           label="Password"
           variant="filled"
-          type='password'
+          type="password"
         />
         {Auth.loadingAuth ? (
           <StyledCircularProgress />
@@ -64,13 +64,33 @@ function Login({ className }) {
 }
 
 const StyledLogin = styled(StyledRegister)`
-  background-position: center right ;
+  background-position: center right;
   background-size: cover;
   border-radius: 20px 0 0 20px;
+  position: relative;
+  :after {
+    content: "";
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 5px;
+    height: 70%;
+    background: ${(props) => props.theme.color};
+    z-index: 3;
+  }
+
+  form {
+    border-radius: 0 !important;
+  }
 
   @media (max-width: 800px) {
-    height: 40% !important;
+    height: 38% !important;
     border-radius: 0;
+
+    :after {
+      content: none;
+    }
   }
 `;
 

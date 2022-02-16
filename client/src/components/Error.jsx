@@ -28,8 +28,8 @@ const StyledError = styled.div`
   justify-content: center;
   align-items: center;
 
-  div{
-    color: ${props => props.theme.color};
+  div {
+    color: ${(props) => props.theme.color};
   }
 `;
 

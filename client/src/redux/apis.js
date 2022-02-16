@@ -1,10 +1,8 @@
 import axios from "axios";
 
-
-
 const url = process.env.REACT_APP_API_URL;
 
-// https://mern-note-project.herokuapp.com/
+// process.env.REACT_APP_API_URL
 
 export const REGISTER_URL = (user) => axios.post(`${url}register`, user);
 export const LOGIN_URL = (user) => axios.post(`${url}login`, user);

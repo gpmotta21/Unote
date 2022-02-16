@@ -36,7 +36,7 @@ export const LogoutUser = () => async (dispatch) => {
 export const DeleteAccount = (id) => async (dispatch) => {
   try {
     const { data } = await API.DELETE_ACCOUNT_URL(id);
-    await dispatch({ type: TYPES.DELETE_ACCOUNT });
+    await dispatch({ type: TYPES.LOGOUT });
     dispatch({ type: TYPES.LOADING_ACCOUNT });
     localStorage.removeItem("token");
   } catch (err) {

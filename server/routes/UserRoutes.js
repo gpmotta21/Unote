@@ -76,6 +76,7 @@ routes.post(
 routes.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
+  console.log(username);
   try {
     const checkUser = await UserModel.findOne({ username });
 

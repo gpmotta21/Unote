@@ -18,7 +18,7 @@ function Register() {
   });
   const [message, setMessage] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [focus, setFocus] = useState(false)
+  const [focus, setFocus] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,7 +26,7 @@ function Register() {
     const { data } = await APIS.REGISTER_URL({ username: username, password: password, email: email, repeat: repeat });
     setLoading(false);
     setResponse(data);
-    setFocus(true)
+    setFocus(true);
   };
 
   useEffect(() => (response.message ? setMessage(true) : false), [response]);
@@ -37,10 +37,10 @@ function Register() {
     leave: { x: 100, opacity: 0 },
   });
 
-  if(message){
+  if (message) {
     setTimeout(() => {
-      setMessage(false)
-    }, 4500)
+      setMessage(false);
+    }, 4500);
   }
 
   return (
@@ -108,15 +108,7 @@ function Register() {
             Register
           </StyledButton>
         )}
-        {transition((style, item) =>
-          item ? (
-            <AnimatedMessage style={style}>
-              Welcome to Noter
-            </AnimatedMessage>
-          ) : (
-            ""
-          )
-        )}
+        {transition((style, item) => (item ? <AnimatedMessage style={style}>Welcome to Noter</AnimatedMessage> : ""))}
       </form>
     </StyledRegister>
   );
@@ -152,8 +144,7 @@ export const StyledRegister = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  height: 70%;
+  height: 80%;
   background-size: cover;
   background-position: center left;
   background-color: ${(props) => props.theme.navbar};
@@ -169,7 +160,7 @@ export const StyledRegister = styled.div`
   }
 
   form {
-    width: 85%;
+    width: 100%;
     padding-left: 10px;
     display: flex;
     flex-direction: column;
@@ -187,28 +178,25 @@ export const StyledRegister = styled.div`
     height: 60%;
     border-radius: 0;
 
-    form{
-    height: 90%;
-    
+    form {
+      height: 90%;
     }
-
   }
 `;
 
 export const StyledCircularProgress = styled(CircularProgress)`
-&&{
-  color: ${props => props.theme.color};
-}
-`
+  && {
+    color: ${(props) => props.theme.color};
+  }
+`;
 
-const AnimatedMessage = styled(animated.div)`
+export const AnimatedMessage = styled(animated.div)`
   position: absolute;
-  top: 110%;
-  background: ${props => props.theme.navbar};
+  top: 105%;
+  background: ${(props) => props.theme.navbar};
   border-radius: 5px;
-  border: solid green 2px;
-  color: ${props => props.theme.color};
+  color: ${(props) => props.theme.color};
   padding: 10px;
-`
+`;
 
 export default Register;

@@ -5,19 +5,20 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 import Login from "./Login";
 import Register from "./Register";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { SetPage } from "../../redux/Actions/UserActions";
 import { devices } from "../../assets/devices";
 import { Carousel } from "./Carousel";
-import home from "../../assets/img/home.svg";
 
 function Homepage() {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(SetPage("Home"));
     Aos.init({ duration: 2000 });
   }, []);
+
   const animations = {
     initial: { opacity: 0, x: "100%" },
     animate: { opacity: 1, x: 0 },
@@ -45,12 +46,8 @@ const StyledHomepage = styled(AnimatedPages)`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-image: url(${(props) => props.theme.home});
-  background-size: cover;
-  overflow: hidden;
   height: 2500px;
+
   * {
     font-family: "Nunito", sans-serif;
   }
@@ -58,10 +55,12 @@ const StyledHomepage = styled(AnimatedPages)`
 
 export const Advertise = styled.div`
   display: flex;
+  justify-content: space-around;
   height: 850px;
   position: relative;
   overflow: hidden;
   transition: all 0.5s;
+
   * {
     font-family: "Nunito", sans-serif;
     color: ${(props) => props.theme.color};
@@ -70,24 +69,25 @@ export const Advertise = styled.div`
   :hover {
     transform: scale(1.02);
   }
+
   > div:first-child {
-    font-size: 70px;
-    align-items: center;
     display: flex;
+    align-items: center;
     justify-content: center;
     text-align: center;
-    
+    width: 30%;
+    font-size: 70px;
   }
 
   > div:last-child {
-    align-items: center;
     display: flex;
+    align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 60%;
   }
 
   img {
-    max-width: 150%;
+    max-width: 140%;
     z-index: -2;
     height: auto;
   }
@@ -101,11 +101,11 @@ export const Advertise = styled.div`
       width: 100%;
     }
     > div:last-child {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-  }
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
   }
   @media ${devices.mobile} {
     img {
@@ -121,24 +121,18 @@ const Interaction = styled.div`
   width: 100%;
   height: 850px;
 
-  > div:first-child{
+  > div:first-child {
     background-image: url(${(props) => props.theme.login});
   }
 
-  > div:last-child{
+  > div:last-child {
     background-image: url(${(props) => props.theme.register});
   }
 
   @media (max-width: 800px) {
-    gap: 1%;
+    gap: 2%;
     flex-direction: column;
   }
-
 `;
 
 export default Homepage;
-
-// position: absolute;
-// transform: translate(-50%, -50%);
-// top: 50%;
-// left: 60%;

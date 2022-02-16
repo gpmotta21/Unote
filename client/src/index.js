@@ -1,14 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import { HashRouter as Router } from 'react-router-dom';
-import thunk from 'redux-thunk';
-import { createStore, applyMiddleware, compose } from 'redux';
-import { Provider } from 'react-redux';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import { HashRouter as Router } from "react-router-dom";
+import thunk from "redux-thunk";
+import { createStore, applyMiddleware, compose } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
 
-import combinedReducers from './redux/store';
+import { Provider } from "react-redux";
 
-const store = createStore(combinedReducers, compose(applyMiddleware(thunk)))
+import combinedReducers from "./redux/store";
+
+const store = createStore(combinedReducers, compose(applyMiddleware(thunk)));
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,7 +20,5 @@ ReactDOM.render(
       </Provider>
     </Router>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
-
-

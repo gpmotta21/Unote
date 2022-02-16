@@ -73,7 +73,12 @@ function UserArea() {
       <ul>
         <StyledNoteCreator color={color}>
           <div>
-            <input disabled={liId} value={liId ? "" : title} onChange={(e) => setTitle(e.target.value)} />
+            <input
+              disabled={liId}
+              value={liId ? "" : title}
+              onChange={(e) => setTitle(e.target.value)}
+              maxLength="15"
+            />
             <ColorSelector style={{ pointerEvents: liId ? "none" : "all" }}>
               <img
                 src={colorI}
@@ -93,7 +98,12 @@ function UserArea() {
               </ColorList>
             </ColorSelector>
           </div>
-          <textarea disabled={liId} value={liId ? "" : note} onChange={(e) => setNote(e.target.value)} />
+          <textarea
+            disabled={liId}
+            value={liId ? "" : note}
+            onChange={(e) => setNote(e.target.value)}
+            max-length="200"
+          />
           <div>
             {UserReducer.loadingNotes ? (
               <LoadingButton loading />

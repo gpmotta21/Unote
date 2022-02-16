@@ -5,6 +5,7 @@ export const CreateNote = (note, id) => async (dispatch) => {
   try {
     dispatch({ type: TYPES.LOADING_NOTES });
     const { data } = await API.CREATE_NOTE_URL(note, id);
+    console.log(data);
     dispatch({ type: TYPES.CREATE_NOTE, payload: data });
   } catch (err) {
     await dispatch({ type: TYPES.FETCH_ACCOUNT_ERROR });

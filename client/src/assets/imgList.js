@@ -1,4 +1,6 @@
 import featuresBgDesktop from "./img/featuresBg.svg";
+import featuresLight from "./img/featuresLight.svg";
+import featuresDark from "./img/featuresDark.svg";
 import featuresBgTablet from "./img/featuresBgTablet.svg";
 import featuresBgMobile from "./img/featuresBgMobile.svg";
 import futureDesktop from "./img/futureDesktop.svg";
@@ -18,4 +20,6 @@ export const imgList = {
   aboutDesktop: aboutDesktop,
   aboutTablet: aboutTablet,
   aboutMobile: aboutMobile,
+  featuresLight: featuresLight,
+  featuresDark: featuresDark,
 };

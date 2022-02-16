@@ -70,7 +70,8 @@ const CarouselContainer = styled.div`
   position: relative;
   width: 100%;
   height: 750px;
-  background: ${(props) => props.theme.navbar};
+  background-image: url(${(props) => props.theme.features});
+  background-size: cover;
   overflow: hidden;
 
   i {
@@ -159,31 +160,3 @@ const CarouselImgs = styled(animated.div)`
     }
   }
 `;
-
-// const items = [
-//     { text: "foo", opacity: 0.3, id: 1 },
-//     { text: "bar", opacity: 0.6, id: 2 },
-//     { text: "baz", opacity: 0.9, id: 3 },
-//   ];
-//   const [t, tt] = useState(items);
-
-//   const springs = useSprings(
-//     t.length,
-//     t.map((item) => ({ opacity: item.opacity, from: { opacity: 0 } }))
-//   );
-//   return (
-//     <StyledCarousel>
-//       {springs.map((props, i) => (
-//         <animated.div style={props} key={i}>
-//           {t[i].text}
-//         </animated.div>
-//       ))}
-//       <button
-//         onClick={() => {
-//           tt([...t, { text: "n sei ", opacity: 0.9, id: 4 }]);
-//         }}
-//       >
-//         {console.log(items)}
-//         add
-//       </button>
-//     </StyledCarousel>

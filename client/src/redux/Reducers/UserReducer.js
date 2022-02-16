@@ -43,8 +43,6 @@ export const UserReducer = (user = initialState, action) => {
     case TYPES.DELETE_NOTE:
       return { ...user, notes: action.payload, loadingNotes: false };
     case TYPES.LOGOUT:
-      return { ...initialState, user: false, notes: [] };
-    case TYPES.DELETE_ACCOUNT:
       return initialState;
     default:
       return user;

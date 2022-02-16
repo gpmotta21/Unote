@@ -72,7 +72,7 @@ const GlobalStyle = createGlobalStyle`
 }
 
 ::-webkit-scrollbar-thumb {
-  background: ${(props) => props.theme.secondary};
+  background: ${(props) => props.theme.color};
 }
 }
 
@@ -83,7 +83,26 @@ button, i{
 body{
   width: 100%;
   background: ${(props) => props.theme.bG};
+  background-image: url(${(props) => props.theme.home});
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-size: 2811px;
+  animation: bg 8s infinite;
+
+  @keyframes bg {
+    0% {
+      background-position: 0% 100px;
+    }
+
+    50% {
+      background-position: 100% 100px;
+    }
+
+    100% {
+      background-position: 0% 100px;
+    }
   }
+}
 `;
 
 export default App;

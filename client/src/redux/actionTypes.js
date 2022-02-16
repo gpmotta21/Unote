@@ -8,9 +8,7 @@ export const LOGOUT = "LOGOUT";
 
 export const LOADING_NOTES = "LOADING_NOTES";
 export const CREATE_NOTE = "CREATE_NOTE";
+export const NOTE_VALIDATION = "NOTE_VALIDATION";
 export const SET_PAGE = "SET_PAGE";
 export const EDIT_NOTE = "EDIT_NOTE";
 export const DELETE_NOTE = "DELETE_NOTE";
-export const DELETE_ACCOUNT = "DELETE_ACCOUNT";
-
-export const CHANGE_THEME = "CHANGE_THEME";

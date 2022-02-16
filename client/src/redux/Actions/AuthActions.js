@@ -19,6 +19,6 @@ export const AuthAction = (user, navigate) => async (dispatch) => {
       dispatch({ type: TYPES.LOGIN, payload: data });
     }
   } catch (err) {
-    console.log(err);
+    navigate("/error");
   }
 };
