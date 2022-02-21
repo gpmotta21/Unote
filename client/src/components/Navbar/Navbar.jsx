@@ -1,22 +1,31 @@
 import styled from "styled-components";
 import { Link } from "react-scroll";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router";
 import InUser from "./InUser";
 import Switch from "@mui/material/Switch";
 import { i } from "../../assets/icons";
 import { devices } from "../../assets/devices";
 import Logo from "../../assets/img/Logo.svg";
 import { StyledCircularProgress } from "../Homepage/Register";
+import { fetchAll } from "../../redux/userSlice";
 
 function Navbar({ setTheme, theme }) {
-  const UserReducer = useSelector((state) => state.UserReducer);
+  const { user } = useSelector((state) => state);
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
+  const location = useLocation();
+
   const token = localStorage.getItem("token");
-  if (UserReducer.loading) {
-  }
+  const config = {
+    headers: {
+      Authorization: token,
+    },
+  };
+
   const content = () => {
-    if (UserReducer.page == "Home" && !token) {
+    if (!token) {
       return (
         <>
           <Link
@@ -44,12 +53,19 @@ function Navbar({ setTheme, theme }) {
           </div>
         </>
       );
-    } else if (UserReducer.user && UserReducer.page == "User") {
+    } else if (user.response && location.pathname == "/userarea") {
       return <InUser setTheme={setTheme} theme={theme} />;
-    } else if (UserReducer.page == "Home" && token) {
+    } else if (token && location.pathname == "/") {
       return (
         <>
-          <button onClick={() => navigate("/userarea")}>Go to my Notes</button>
+          <button
+            onClick={() => {
+              dispatch(fetchAll(config));
+              navigate("/userarea");
+            }}
+          >
+            Go to my Notes
+          </button>
           <div>
             <span>Theme</span>
             <Switch
@@ -68,9 +84,7 @@ function Navbar({ setTheme, theme }) {
       <div>
         <img src={Logo} onClick={() => navigate("/")} style={{ marginLeft: "20px" }} />
       </div>
-      <StyledProfileArea>
-        {UserReducer.loadingAccount ? <StyledCircularProgress color="success" /> : content()}
-      </StyledProfileArea>
+      <StyledProfileArea>{user.loadingUser ? <StyledCircularProgress color="success" /> : content()}</StyledProfileArea>
     </StyledNavbar>
   );
 }

@@ -1,6 +1,4 @@
 import mongoose from "mongoose";
-import uniqueValidator from "mongoose-unique-validator";
-import validator from "validator";
 
 const User = new mongoose.Schema(
   {
@@ -20,15 +18,14 @@ const User = new mongoose.Schema(
     },
     notes: [
       {
-        title: { type: String, required: [true, "Please enter a title"] },
-        note: { type: String, required: [true, "Please enter a title"] },
+        title: { type: String },
+        note: { type: String },
         color: { type: String },
       },
     ],
   },
   { collection: "user-data" }
 );
-User.plugin(uniqueValidator);
 
 const UserModel = mongoose.model("UserModel", User);
 export default UserModel;

@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { LogoutUser } from "../redux/Actions/UserActions";
 import { useNavigate } from "react-router";
 import { StyledButton } from "./Navbar/InUser";
+import { logout } from "../redux/userSlice";
 
 export function Error() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(LogoutUser());
+    dispatch(logout());
   }, []);
 
   return (
@@ -29,6 +29,7 @@ const StyledError = styled.div`
   align-items: center;
 
   div {
+    margin-bottom: 15px;
     color: ${(props) => props.theme.color};
   }
 `;

@@ -2,25 +2,30 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { i } from "../../assets/icons.js";
-import { DeleteAccount, LogoutUser } from "../../redux/Actions/UserActions.js";
 import { useTransition, animated } from "react-spring";
 import { useState } from "react";
-import user from "../../assets/img/user.png";
+import userImg from "../../assets/img/user.png";
 import Button from "@mui/material/Button";
 import { devices } from "../../assets/devices.js";
 import Switch from "@mui/material/Switch";
+import { deleteAccount, logout } from "../../redux/userSlice.js";
 
 function InUser({ setTheme, theme }) {
+  const { user } = useSelector((state) => state);
+
   const [showInfo, setShowInfo] = useState(false);
   const [confirmDel, setConfirmDel] = useState(false);
 
   const dispatch = useDispatch();
-  const UserReducer = useSelector((state) => state.UserReducer);
   const navigate = useNavigate();
 
-  const logout = () => {
-    dispatch(LogoutUser());
+  const handleLogout = () => {
+    dispatch(logout());
     navigate("/");
+  };
+
+  const handleDeleteAccount = () => {
+    dispatch(deleteAccount(user.response._id));
   };
 
   const deleteTransition = useTransition(confirmDel, {
@@ -28,11 +33,6 @@ function InUser({ setTheme, theme }) {
     enter: { x: 0, opacity: 1, transform: "translate(-50%, -50%)" },
     leave: { x: 100, opacity: 0 },
   });
-
-  const deleteAccount = () => {
-    navigate("/");
-    dispatch(DeleteAccount(UserReducer.user._id));
-  };
 
   const profileTransition = useTransition(showInfo, {
     from: { x: 100, opacity: 0 },
@@ -45,7 +45,7 @@ function InUser({ setTheme, theme }) {
       <OutHover>
         <OutHoverUser onClick={() => setShowInfo(true)}>
           <span>{i.user}</span>
-          <span>{UserReducer.user.username}</span>
+          <span>{user.response.username}</span>
           <span>{i.logout}</span>
         </OutHoverUser>
         <div>
@@ -63,15 +63,15 @@ function InUser({ setTheme, theme }) {
           <AnimatedProfile style={style} onMouseLeave={() => setShowInfo(false)}>
             <i onClick={() => setShowInfo(false)}>{i.close}</i>
             <ProfileImg>
-              <img src={user} />
-              <div>{UserReducer.user.username}</div>
+              <img src={userImg} />
+              <div>{user.response.username}</div>
             </ProfileImg>
             <ProfileInfo>
-              <div>{UserReducer.user.email}</div>
-              <span>Total notes: {UserReducer.notes.length}</span>
+              <div>{user.response.email}</div>
+              <span>Total notes: {user.response.notes.length}</span>
             </ProfileInfo>
             <div>
-              <StyledButton onClick={logout} endIcon={i.logout}>
+              <StyledButton onClick={handleLogout} endIcon={i.logout}>
                 Logout
               </StyledButton>
               <StyledButton
@@ -97,7 +97,7 @@ function InUser({ setTheme, theme }) {
               <ConfirmDelBtn onClick={() => setConfirmDel(false)} endIcon={i.logout}>
                 No, I want to stay
               </ConfirmDelBtn>
-              <ConfirmDelBtn onClick={deleteAccount} endIcon={i.trash}>
+              <ConfirmDelBtn onClick={handleDeleteAccount} endIcon={i.trash}>
                 Yes
               </ConfirmDelBtn>
             </div>

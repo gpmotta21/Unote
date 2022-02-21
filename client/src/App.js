@@ -4,7 +4,7 @@ import { AnimatePresence } from "framer-motion";
 import { ThemeProvider } from "styled-components";
 
 import Homepage from "./components/Homepage/Homepage";
-import UserArea from "./components/UserArea";
+import UserArea from "./components/UserArea/UserArea";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer";
 import Error from "./components/Error";

@@ -5,17 +5,12 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 import Login from "./Login";
 import Register from "./Register";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { SetPage } from "../../redux/Actions/UserActions";
 import { devices } from "../../assets/devices";
 import { Carousel } from "./Carousel";
 
 function Homepage() {
-  const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(SetPage("Home"));
     Aos.init({ duration: 2000 });
   }, []);
 
@@ -50,6 +45,7 @@ const StyledHomepage = styled(AnimatedPages)`
 
   * {
     font-family: "Nunito", sans-serif;
+    color: ${(props) => props.theme.color};
   }
 `;
 
@@ -60,11 +56,6 @@ export const Advertise = styled.div`
   position: relative;
   overflow: hidden;
   transition: all 0.5s;
-
-  * {
-    font-family: "Nunito", sans-serif;
-    color: ${(props) => props.theme.color};
-  }
 
   :hover {
     transform: scale(1.02);
@@ -107,6 +98,7 @@ export const Advertise = styled.div`
       width: 100%;
     }
   }
+
   @media ${devices.mobile} {
     img {
       max-width: 950px;

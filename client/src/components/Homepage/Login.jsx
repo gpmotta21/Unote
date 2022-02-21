@@ -1,27 +1,43 @@
 import styled from "styled-components";
 import { MyTextField, StyledCircularProgress } from "./Register";
-import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { i } from "../../assets/icons";
 import { StyledButton } from "../Navbar/InUser";
 import { StyledRegister } from "./Register";
-import { AuthAction } from "../../redux/Actions/AuthActions";
-import CircularProgress from "@mui/material/CircularProgress";
+import { resetAuth, tryAuth } from "../../redux/authSlice";
+import { fetchAll } from "../../redux/userSlice";
 
 function Login({ className }) {
+  const { auth } = useSelector((state) => state);
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const Auth = useSelector((s) => s.AuthReducer);
   const handleClick = async (e) => {
     e.preventDefault();
-    dispatch(AuthAction({ username: username, password: password }, navigate));
+    dispatch(tryAuth({ username: username, password: password }));
   };
+
+  useEffect(() => {
+    if (auth.response.access) {
+      const config = {
+        headers: {
+          Authorization: auth.response.access,
+        },
+      };
+
+      navigate("/userarea");
+      localStorage.setItem("token", auth.response.access);
+
+      dispatch(fetchAll(config)).then(() => {
+        dispatch(resetAuth());
+      });
+    }
+  }, [auth]);
 
   return (
     <StyledLogin className={className}>
@@ -29,11 +45,11 @@ function Login({ className }) {
       <form onSubmit={(e) => handleClick(e)}>
         <MyTextField
           onChange={(e) => setUsername(e.target.value)}
-          colorP={Auth.userError == undefined ? "green" : false}
-          error={Auth.userError ? true : false}
-          helperText={Auth.userError ? Auth.userError : false}
-          focused={Auth.userError == undefined ? true : undefined}
-          color={Auth.userError == undefined ? "success" : false}
+          colorP={auth.response.userError !== undefined ? "green" : false}
+          error={auth.response.userError ? true : false}
+          helperText={auth.response.userError ? auth.response.userError : false}
+          focused={auth.response.userError == undefined ? undefined : true}
+          color={auth.response.userError == undefined ? false : "success"}
           autoComplete="off"
           style={{ width: "80%" }}
           id="filled-size-normal"
@@ -42,8 +58,8 @@ function Login({ className }) {
         />
         <MyTextField
           onChange={(e) => setPassword(e.target.value)}
-          error={Auth.passwordError ? true : false}
-          helperText={Auth.passwordError ? Auth.passwordError : false}
+          error={auth.response.passwordError ? true : false}
+          helperText={auth.response.passwordError ? auth.response.passwordError : false}
           autoComplete="off"
           style={{ width: "80%" }}
           id="filled-size-normal"
@@ -51,7 +67,7 @@ function Login({ className }) {
           variant="filled"
           type="password"
         />
-        {Auth.loadingAuth ? (
+        {auth.isLoading ? (
           <StyledCircularProgress />
         ) : (
           <StyledButton type="submit" variant="contained">
@@ -68,6 +84,7 @@ const StyledLogin = styled(StyledRegister)`
   background-size: cover;
   border-radius: 20px 0 0 20px;
   position: relative;
+
   :after {
     content: "";
     position: absolute;

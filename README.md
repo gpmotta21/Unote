@@ -1,4 +1,5 @@
-# Welcome to Unote ! -> [Click here to go to the website](https://unote.netlify.app/#/userarea)
+# Welcome to Unote ! -> [Click here to go to the website](https://unote.netlify.app/)
+
 With Unote you can access your notes from anywhere by creating an online account.
 
 I created Unote entirely by myself, all the way from it's design using Figma to the implementation of the MERN stack, which is composed by MongoDB, Express, React and NodeJS.

@@ -1,16 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { HashRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import thunk from "redux-thunk";
 import { createStore, applyMiddleware, compose } from "redux";
+import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 
-import { Provider } from "react-redux";
+import authSlice from "./redux/authSlice.js";
+import userSlice from "./redux/userSlice";
 
-import combinedReducers from "./redux/store";
-
-const store = createStore(combinedReducers, compose(applyMiddleware(thunk)));
+const store = configureStore({
+  reducer: {
+    auth: authSlice,
+    user: userSlice,
+  },
+});
 
 ReactDOM.render(
   <React.StrictMode>

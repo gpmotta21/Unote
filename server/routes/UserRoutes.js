@@ -76,16 +76,16 @@ routes.post(
 routes.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
-  console.log(username);
   try {
     const checkUser = await UserModel.findOne({ username });
 
-    if (!checkUser) return res.send({ userError: "Invalid username" });
+    if (!checkUser) return res.send({ access: false, userError: "Invalid username" });
 
     const checkPassword = await bcrypt.compare(password, checkUser.password);
     const token = jwt.sign({ username, password, id: checkUser._id }, "password123");
-    if (checkPassword) res.json({ auth: token, userError: false, passwordError: false });
-    else res.json({ auth: false, passwordError: "Invalid password" });
+
+    if (checkPassword) res.json({ access: token, userError: false, passwordError: false });
+    else res.json({ access: false, userError: false, passwordError: "Invalid password" });
   } catch (err) {
     res.status(500).send("An error ocurred");
   }
@@ -95,7 +95,6 @@ routes.post("/login", async (req, res) => {
 
 routes.get("/getaccount", async (req, res) => {
   const token = req.headers.authorization;
-  console.log("rtes");
 
   try {
     const decoded = jwt.verify(token, "password123");
